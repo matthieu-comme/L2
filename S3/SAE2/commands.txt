@@ -1,0 +1,4 @@
+DELETE=./sae_delete.sh
+LS=./sae_trashbox_ls.sh
+RESTORE=./sae_restore.sh
+KEY=CLEFSAE2425
