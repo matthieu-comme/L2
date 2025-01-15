@@ -1,0 +1,24 @@
+let f = function x -> x;;
+f: 'a -> 'a
+let g = function h -> function x -> (h x);;
+g: ('a -> 'b) -> 'a -> 'b
+
+let h = function x -> x + 1 ;;
+let g = function h -> function x -> (h x) ;;
+
+let f1 = fun p x y -> p ( x ( y )) ;;
+
+
+let f2 = fun p g x y -> (p x , g y) ;;
+
+
+let f3 = fun p g x y -> p (g (x , y)) ;;
+
+
+let f4 = fun p g x y -> p ( g(x) , y) ;;
+
+let pui = fun x n -> app_n n (fun y -> y*x) 1;;
+
+let rec app_n = fun 
+	  0 f x -> x
+	| n f x -> app_n (n-1) f (f x);;

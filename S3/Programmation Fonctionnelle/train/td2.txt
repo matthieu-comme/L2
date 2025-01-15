@@ -1,0 +1,27 @@
+let rec combien = function
+	  n when n < 0 -> -1
+	| n when n >=10 -> n/10 + combien(n mod 10)
+	| n  -> n/5 + n mod 5;;
+
+let rec syracuse = function 
+	  n when n <= 0 -> -1
+	| 1 -> 0
+	| n when n mod 2 = 0 -> 1 + syracuse(n/2)
+	| n -> 1 + syracuse(3*n+1);;
+
+let rec suite_carre = function
+	  ent,0 -> ent
+	| ent,n when n mod 2 = 0 -> 2*suite_carre(ent,n-1) + n*n
+	| ent,n ->  2*suite_carre(ent,n-1) - n*n;;
+
+let rec f4 = function 
+	  m,1 -> m mod 10
+	| m,n -> f4(m/10,n-1);;
+
+let rec aux_reverse = function
+	  0,res -> res
+	| n,res -> aux_reverse(n/10,10*res + n mod 10);;
+
+let reverse = function n -> aux_reverse(n,0);;
+
+let palindrome = function n -> n = reverse(n);;

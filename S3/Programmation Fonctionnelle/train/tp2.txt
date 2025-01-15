@@ -1,0 +1,46 @@
+let rec puissance = function
+	  n,0 -> 1
+	| n,p -> n*puissance(n,p-1);;
+
+let rec nombre = function 
+	  [] -> 1
+	| (p,n)::r -> puissance(p,n)*nombre(r);;
+
+let rec multiplier = function
+	 [],[] -> []
+	| li1,[] -> li1
+	| [],li2 -> li2
+	| (p1,n1)::r1,(p2,n2)::r2 when p1=p2 -> (p1,n1+n2)::multiplier(r1,r2)
+	| (p1,n1)::r1,(p2,n2)::r2 when p1<p2 -> (p1,n1)::multiplier(r1,(p2,n2)::r2)
+	| (p1,n1)::r1,(p2,n2)::r2 when p1>p2 -> (p2,n2)::multiplier((p1,n1)::r1,r2);;
+
+let rec nb_diviseurs = function	
+	  [] -> 1
+	| (p,n)::r -> (n+1)*nb_diviseurs(r);;
+
+let rec pgcd = function
+	  [],_ -> 1
+	| _,[] -> 1
+	| (p1,n1)::r1,(p2,n2)::r2 when p1<p2 -> pgcd(r1,(p2,n2)::r2)
+	| (p1,n1)::r1,(p2,n2)::r2 when p1>p2 -> pgcd((p1,n1)::r1,r2)
+	| (p1,n1)::r1,(p2,n2)::r2 when n1<n2 -> puissance(p1,n1)*pgcd(r1,r2)
+	| (p1,n1)::r1,(p2,n2)::r2 -> puissance(p2,n2)*pgcd(r1,r2);;
+
+let rec creer_liste = function
+	  0,_ -> []
+	| e1,e2 -> e2::creer_liste(e1-1,e2);;
+
+let rec multi_bool = function 
+	  [] -> []
+	| e1::e2::r -> creer_liste(e1,true)::creer_liste(e2,false)::multi_bool(r)
+	| e1::r -> creer_liste(e1,true)::multi_bool(r);;
+
+let rec aux_multi_liste = function
+	  [],_ -> []
+	| e::r,n -> creer_liste(e,n)::aux_multi_liste(r,n+1);;
+
+let multi_liste = function liste -> aux_multi_liste(liste,1);;
+
+
+
+

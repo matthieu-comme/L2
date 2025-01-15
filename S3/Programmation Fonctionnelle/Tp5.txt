@@ -1,0 +1,41 @@
+type 'a arbre_bin = vide | Noeud of 'a * 'a arbre_bin * 'a arbre_bin;;
+
+let rec recherche = function 
+	  elm, Noeud(r,g,d)  when (elm = r) -> true
+	| elm, vide -> false
+	| elm, Noeud(r,g,d) when (elm<r) -> recherche(elm,g)
+	| elm, Noeud(r,g,d) -> recherche(elm,d);;
+
+let A = Noeud(10,Noeud(5,Noeud(2,vide,vide),Noeud(7,vide,vide)),Noeud(16,vide,Noeud(20,vide,vide)));;
+let B = Noeud(10,Noeud(11,Noeud(2,vide,vide),Noeud(7,vide,vide)),Noeud(16,vide,Noeud(20,vide,vide)));;
+
+
+let rec inserer = function
+	  elm, vide -> Noeud(elm,vide,vide)
+	| elm, Noeud(r,g,d) when (elm <= r) -> Noeud(r,inserer(elm,g),d)
+	| elm, Noeud(r,g,d) -> Noeud(r,g,inserer(elm,d));;
+
+let rec aux_estABR = function
+	  x, vide, _ -> true
+	| x, Noeud(r,g,d), 0 when (r>x) -> false
+	| x, Noeud(r,g,d), 1 when (r<=x) -> false
+	| x, Noeud(r,g,d), _ -> estABR(r,g,0) && estABR(r,d,1);;
+
+let estABR = function 
+	vide -> invalid_arg"arbre vide"
+	| Noeud(r,g,d)-> aux_estABR(r,g,0) && aux_estABR(r,d,1);;
+
+let listeA = [12;49;41;20;78;87];;
+
+let rec aux_creerABRdepuisListe = function
+	  [], vide -> vide
+	| [], Noeud(r,g,d) -> Noeud(r,g,d)
+	| (elm::li), Noeud(r,g,d) -> aux_creerABRdepuisListe(li, inserer(elm, Noeud(r,g,d)))
+	| elm::li, vide -> aux_creerABRdepuisListe(li, inserer(elm, vide));;
+
+
+let creerABRdepuisListe = function liste -> aux_creerABRdepuisListe(liste, vide);;
+
+let rec parcoursInfixe = function
+	  vide -> []
+	| Noeud(r,g,d) -> parcoursInfixe(g)@[r]@parcoursInfixe(d);;

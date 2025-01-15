@@ -1,0 +1,26 @@
+let rec generique = fun
+	  _ [] [] -> []
+	| f (e1::r1) (e2::r2) -> (f e1 e2)::(generique f r1 r2)
+	| f (e1::r1) [] -> (f e1 0)::(generique f r1 [])
+	| f [] (e2::r2) -> (f 0 e2)::(generique f [] r2);;
+
+let fa = fun x y -> [x;y];;
+let fb = fun x y -> x+y;;
+let fc = fun x y -> x*y;;
+let fd = fun x 0 -> -1 | x y -> x/y;;
+
+type nat = Zero | S of nat;;
+
+let trois = S(S(S(Zero))) and quatre = S(S(S(S(Zero))));;
+
+let rec isInf = fun a b -> a < b;;
+
+let rec isImpair = function
+	  S(Zero) -> true
+	| Zero -> false
+	| S(S(entier)) -> isImpair(entier);;
+
+let rec fib = function
+	  0 -> 0
+	| 1 -> 1
+	| n -> fib(n-2) + fib(n-1);;

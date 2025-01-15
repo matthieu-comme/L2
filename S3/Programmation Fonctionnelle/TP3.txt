@@ -1,0 +1,43 @@
+	EXERCICE 1:
+
+let pair = function n -> (n mod 2) = 0;;
+
+let rec pour_tout = fun 
+	  p [] -> true
+	| p (e::r) when p(e) -> pour_tout p r
+	| _ _ -> false;;
+
+let rec il_existe = fun
+	  p [] -> false
+	| p (e::r) when p(e) -> true
+	| p (e::r) -> il_existe p r;;
+
+
+
+	EXERCICE 2:
+let rec symetrique = fun
+	  [] _ -> true
+	| ((x,y)::r) lst when mem (y,x) r || mem (y,x) lst -> symetrique r ((x,y)::lst)
+	| _ _ -> false;; 
+
+let sym = function liste -> pour_tout (map (function (x,y) -> (y,x)) liste) ;;
+
+Question 2: *****
+let rec ens_def_simple = function
+	  [] -> []
+	| (x,y)::r -> x::y::ens_def_simple(r);;
+
+let rec unique = function
+	  [] -> []
+	| e::r when (mem e r) -> unique(r)
+	| e::r -> e::unique(r);;
+
+let ens_def = function liste -> unique (ens_def_simple liste);;
+
+let reflexive = function (x,y)::liste -> pour_tout (mem (x,x) liste ) (ens_def (x,y)::liste);;
+
+pour tout (x::ens_def), mem (x,x) liste
+ 
+
+
+

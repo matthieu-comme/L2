@@ -1,0 +1,31 @@
+#let sommecomplexe = function ((a,b),(c,d)) -> (a+.c, b+.d);;
+sommecomplexe : (float * float) * (float * float) -> float * float = <fun>
+
+#let produitcomplexe = function ((a,b),(c,d)) -> (a*.c -. b*.d, a*.d +. b*.c);;
+produitcomplexe : (float * float) * (float * float) -> float * float = <fun>
+
+#let rec extract_n = function (0,m) -> m mod 10 | (n,m) when n>0 -> extract_n(n-1,m/10) | _,_ -> invalid_arg"n négatif";;
+extract_n : int * int -> int = <fun>
+#extract_n(3,264518);;
+- : int = 4
+
+#let rec sommeChiffres = function n when n<10 -> n | n -> n mod 10 + sommeChiffres(n/10);;
+sommeChiffres : int -> int = <fun>
+#let harshad = function n -> n mod sommeChiffres(n) = 0;;
+harshad : int -> bool = <fun>
+#harshad(18);;
+- : bool = true
+
+#let rec aux_partage = function (p,[],li1,li2)->(li1,li2) | (p,e::r,li1,li2) when e<=p -> aux_partage(p,r,e::li1,li2) |(p,e::r,li1,li2) -> aux_partage(p,r,li1,e::li2);;
+aux_partage : 'a * 'a list * 'a list * 'a list -> 'a list * 'a list = <fun>
+#let partage = function (pivot,liste) -> aux_partage(pivot,liste,[],[]);;
+partage : 'a * 'a list -> 'a list * 'a list = <fun>
+#partage(5,[1;9;18;5;3]);;
+- : int list * int list = [3; 5; 1], [18; 9]
+
+#let rec puissanceNT = function (n,0) -> 1 | (n,p) -> n*puissanceNT(n,p-1);;
+puissanceNT : int * int -> int = <fun>
+#let rec aux_puissanceT = function (n,0,res) -> res | (n,p,res) -> aux_puissanceT(n,p-1,n*res);;
+aux_puissanceT : int * int * int -> int = <fun>
+#let puissanceT = function (n,p) -> aux_puissanceT(n,p,1);;
+puissanceT : int * int -> int = <fun>

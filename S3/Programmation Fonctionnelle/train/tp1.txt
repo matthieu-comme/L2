@@ -1,0 +1,32 @@
+let pytha = function (x,y,z) -> x*x + y*y = z*z;;
+
+let rec pgcd = function
+	  a,b when b = 0 -> a
+	| a,b -> pgcd(b,a mod b);;
+
+let ppcm = function (a,b) -> a*b / pgcd(a,b);;
+
+let rec fibo = function
+	  0 -> 0
+	| 1 -> 1
+	| n -> fibo(n-1) + fibo(n-2);;
+
+let rec suite = function
+	  0 -> 0
+	| n -> 1 + 2*suite(n-1)*suite(n-1);;
+
+let rec reverse = function
+	  [] -> []
+	| e::r -> reverse(r)@[e];;
+
+let rec rassemble = function
+	  [],[] -> []
+	| e::r,[] -> invalid_arg"liste 2 trop courte"
+	| [],e::r -> invalid_arg"liste 1 trop courte"
+	| e1::r1,e2::r2 -> (e1,e2)::rassemble(r1,r2);;
+
+let rec aux_separe = function
+	  [],lix,liy -> lix,liy
+	| (x,y)::r,lix,liy -> aux_separe(r,lix@[x],liy@[y]);; 
+
+let separe = function liste -> aux_separe(liste,[],[]);;

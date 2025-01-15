@@ -1,0 +1,60 @@
+		EXERCICE 1:
+
+	
+let test = [(2,3);(3,1);(7,2)];;
+let listeA=[(3,4);(5,3);(7,2);(11,1)] and listeB=[(5,2);(7,3);(13,1)];;
+
+let rec puissance = function
+	(n,0) -> 1 
+	| (n,p) -> n*puissance(n,p-1);;
+
+	Question 1:
+let rec nombre = function
+	  [] -> 1
+	| (n,a)::r -> puissance(n,a) * nombre(r);;
+
+	Question 2:
+let rec multiplier = function
+	  [],[] -> []
+	| li1,[] -> li1
+	| [],li2 -> li2
+	| (p1,n1)::r1,(p2,n2)::r2 when (p1=p2) -> (p1,n1+n2)::multiplier(r1,r2)
+	| (p1,n1)::r1,(p2,n2)::r2 when (p1<p2) -> (p1,n1)::multiplier(r1,(p2,n2)::r2)
+	| (p1,n1)::r1,(p2,n2)::r2 -> (p2,n2)::multiplier((p1,n1)::r1,r2);;
+
+	Question 3:
+let rec nb_diviseurs = function
+	  [] -> 1
+	| (n,p)::r -> (p+1)*nb_diviseurs(r);;
+	
+	Question 4:
+let rec aux_pgcd = function
+	  [],[] -> []
+	| li1,[] -> []
+	| [],li2 -> []
+	| (p1,n1)::r1,(p2,n2)::r2 when (p1=p2 && n1<n2) -> (p1,n1)::aux_pgcd(r1,r2)
+	| (p1,n1)::r1,(p2,n2)::r2 when (p1=p2) -> (p1,n2)::aux_pgcd(r1,r2)
+	| (p1,n1)::r1,(p2,n2)::r2 when (p1<p2) -> aux_pgcd(r1,(p2,n2)::r2)
+	| (p1,n1)::r1,(p2,n2)::r2 -> aux_pgcd((p1,n1)::r1,r2);;
+
+let pgcd(li1,li2) = nombre(aux_pgcd(li1,li2));;
+
+		Exercice 2:
+
+	Question 1:
+let rec créer_liste = function
+	  (0,e2) -> []
+	| (e1,e2) -> e2::créer_liste(e1-1,e2);;
+
+	Question 2:
+let rec multi_bool = function
+	  [] -> []
+	| e1::e2::r -> créer_liste(e1,true)::créer_liste(e2,false)::multi_bool(r)
+	| e1::r -> créer_liste(e1,true)::multi_bool(r);;
+
+	Question 3:
+let rec aux_multi_liste = function
+	  [],_ -> []
+	| (e::r,n) -> créer_liste(e,n)::aux_multi_liste(r,n+1);;
+
+let multi_liste(liste) = aux_multi_liste(liste,1);;

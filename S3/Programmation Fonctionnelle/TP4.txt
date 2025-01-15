@@ -1,0 +1,71 @@
+	EXERCICE 1 :
+let f = fun a -> (function b -> a + b);;
+let g = fun p -> p(1)+1;;
+let h = fun p x -> p(1)+x;;
+let i = fun p x -> float_of_int(p(1)+x);;
+let j = fun p x -> p(1)+x = 3;;
+
+	EXERCICE 2:
+
+let listeA = [1;2;3;4] and listeB = [5;6;7;8];;
+exception divide_by_zero;;
+exception premiere_liste_trop_courte;;
+exception deuxieme_liste_trop_courte;;
+
+let f = fun 
+	  p [] [] -> []
+	| p li1 li2 -> p li1 li2;;
+
+let rec fa = fun 
+	  [] [] -> []
+	| li [] -> raise deuxieme_liste_trop_courte
+	| [] li -> raise premiere_liste_trop_courte
+	| (x::l1) (y::l2) -> [x;y]::fa l1 l2;;
+
+let rec fb = fun 
+	  [] [] -> []
+	| li [] -> raise deuxieme_liste_trop_courte
+	| [] li -> raise premiere_liste_trop_courte
+	| (x::l1) (y::l2) -> (x+y)::fb l1 l2;;
+
+let rec fc = fun 
+	  [] [] -> []
+	| li [] -> raise deuxieme_liste_trop_courte
+	| [] li -> raise premiere_liste_trop_courte
+	| (x::l1) (y::l2) -> (x*y)::fc l1 l2;;
+
+let rec fd = fun 
+	  [] [] -> []
+	| li [] -> raise deuxieme_liste_trop_courte
+	| [] li -> raise premiere_liste_trop_courte
+	| (x::l1) (0::l2) -> invalid_arg"peut pas diviser par zero !"
+	| (x::l1) (y::l2) -> (x/y)::fd l1 l2;;
+
+	EXERCICE 3:
+
+type nat = Zero | S of nat;; 
+let trois = S(S(S(Zero))) and quatre = S(S(S(S(Zero))));;
+let isInf = fun a b -> a < b;;
+
+let rec aux_isImpair = function
+	  Zero -> 0
+	| S(suite) -> 1 + aux_isImpair(suite);;
+
+let isImpair = function 
+	  n when (aux_isImpair(n) mod 2 = 0) -> false
+	| _ -> true ;;
+
+refaire la question 3
+
+	EXERCICE 4 :
+
+let rec fib = function 
+	  0 -> 0
+	| 1 -> 1
+	| n -> fib(n-2) + fib(n-1);;
+
+type ABAR = Vide | Noeud of ABAR * int * ABAR;;
+
+ce qu'on doit obtenir -> Fib3: ABAR = AR(RD1, 3, AR(RD0,2,RD1)) 
+
+

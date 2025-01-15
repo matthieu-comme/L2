@@ -1,0 +1,79 @@
+let rec last = function
+	  [] -> invalid_arg"liste vide"
+	| e::[] -> e
+	| e::r -> last(r);;
+
+let rec double = function
+	  [] -> []
+	| e::r -> e::e::double(r);;
+
+let rec double_bis = function
+	  [] -> []
+	| e::r -> [e;e]::double_bis(r);;
+
+let rec aux_max_liste = function 
+	  [],max -> max
+	| e::r,max when e>max -> aux_max_liste(r,e)
+	| e::r,max -> aux_max_liste(r,max);;
+
+let max_liste = function [] -> 
+	  invalid_arg"liste vide" 
+	| e::r -> aux_max_liste(r,e);;
+
+let rec compter = function
+	  [],_ -> 0 
+	| (e::r),n when e=n -> 1 + compter(r,n)
+	| (e::r),n -> compter(r,n);;
+
+let rec remdup = function
+	  [] -> []
+	| e::r when compter(r,e) = 0 -> e::remdup(r)
+	| e::r -> remdup(r);;
+
+let rec nbr_egales = function
+	  (e1::r1),(e2::r2) when e1 = e2 -> 1 + nbr_egales(r1,r2)
+	| (e1::r1),(e2::r2) when e1 <> e2 -> nbr_egales(r1,r2)
+	| _,_ -> 0;;
+
+let rec aux_liste_pos_egal = function
+	  (e1::r1),(e2::r2),n when e1 = e2 -> (e1,n)::aux_liste_pos_egal(r1,r2,n+1)
+	| (e1::r1),(e2::r2),n when e1 <> e2 -> aux_liste_pos_egal(r1,r2,n+1)
+	| _,_,_ -> [];;
+
+let liste_pos_egal = function (liste1,liste2) -> aux_liste_pos_egal(liste1,liste2,1);;
+
+let rec payer_illimite = function
+	  _,0 -> [] 
+	| (e::r),p when p>=e -> e::payer_illimite((e::r),p )
+	| (e::r),p -> payer_illimite(r,p)
+	| [],_ -> [-1];;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

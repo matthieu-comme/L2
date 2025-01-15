@@ -1,0 +1,54 @@
+type Nombre = Entier of int | Reel of float | Complexe of float*float;;
+
+let carre = function
+	  Entier(m) -> Entier(m*m)
+	| Reel(x) -> Reel(x*.x)
+	| Complexe(a,b) -> Complexe(a*.a -. b*.b, 2.*.a*.b);;
+
+type polynome = Nul | PlusXfois of int * polynome ;;
+let P = PlusXfois (4, PlusXfois (5, PlusXfois (1, Nul))) ;;
+
+let rec puissance = function _,0 -> 1 | (n,p) -> n*puissance(n,p-1);;
+
+let rec aux_evaluer1 = function
+	  [],_,_ -> 0
+	| a::r,n,cpt -> a*puissance(n,cpt) + aux_evaluer1(r,n,cpt+1);;
+
+let evaluer1 = function liste,n -> aux_evaluer1(liste,n,0);;
+
+let rec evaluer2 = function 
+	  n,Nul -> 0
+	| n,PlusXfois(a,reste) -> a + n*evaluer2(n,reste);;
+
+let rec liste_to_pol = function
+	[] -> Nul
+	|  e::r -> PlusXfois(e,liste_to_pol(r));;
+
+let rec pol_to_liste = function
+	  Nul -> [] 
+	| PlusXfois(a,reste) -> a::pol_to_liste(reste);;
+
+let rec sommePol = function
+	  Nul,b -> b
+	| a,Nul -> a
+	| PlusXfois(a,ra),PlusXfois(b,rb) -> PlusXfois(a+b,sommePol(ra,rb));;
+
+type arbre_eval = Entier of int | Somme of arbre_eval*arbre_eval | Produit of arbre_eval*arbre_eval;;
+
+let op = Produit(Somme(Entier(8),Entier(5)),Somme(Entier(6),Entier(7)));;
+
+let rec nbr_opérations = function
+    Entier _ -> 0
+  | Somme (gauche, droite) -> 1 + nbr_opérations gauche + nbr_opérations droite
+  | Produit (gauche, droite) -> 1 + nbr_opérations gauche + nbr_opérations droite;;
+
+
+
+
+
+
+
+
+
+
+
