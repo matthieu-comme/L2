@@ -1,8 +1,8 @@
 <html>
 <body>
 <h2 align=center>Jeu : plus grand, plus petit</h2>
-<?php
-if (!isset($_POST["a_trouver"])) {
+<?php // FIXER LE PROBLEME DE RANDOM !!!!!
+if (!isset($_POST["a_trouver"])) { //
 	$a_trouver = mt_rand(0,100);
 	$_POST['a_trouver'] = $a_trouver;
 }  
@@ -15,7 +15,7 @@ if (!isset($_POST["a_trouver"])) {
 </form>
 <?php
 if (isset($_POST['propose'])) {
-	$n = $_POST["propose"];
+	$n = $a_trouver;
 	if($n < $_POST['a_trouver']) echo "c'est +"; 
 	else if ($n > $_POST['a_trouver']) echo "c'est -";
 	else echo "VICTOIRE";

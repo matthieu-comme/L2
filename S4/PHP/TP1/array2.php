@@ -13,14 +13,9 @@ $distance=array("paris" => array("nice" => 900, "lille" => 300),
 800));
 
 function distanceAB($distance,$A,$B) {
-	foreach($distance as $key1 => $arr) {
-		if ($key1 == $A) { 	// || $key == $ville2
-			foreach($arr as $key2 => $value) {
-				if($key2 == $B)
-					return "Distance ".$A." - ".$B." est ".$value." km";}
-		}
-	}
-	return "Trajet non trouvé...";
+	$d = $distance["$A"]["$B"];
+	if (isset($d)) return "La distance $A - $B est $d km";
+	else return "Trajet non trouvé...";
 }
 echo distanceAB($distance,$ville1,$ville2);
 ?>
