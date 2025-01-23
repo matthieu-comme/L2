@@ -1,6 +1,5 @@
 <?php 
-$date = date("Y-m-d H:i:s");
-//echo $date."<br>";
+$date = date("Y-m-d H:i:s")."\n";
 if (!file_exists("historique.txt")) {
 	echo "Je ne trouve pas l'historique...";
 	return;
@@ -18,7 +17,7 @@ if(!fwrite($fichier,$date)) {
 	echo "erreur lors de l'ecriture";
 	return;
 }
-echo "c'est ecrit inch";
+
 if(!flock($fichier,3)) {
 	echo "erreur de deverouillage";
 	return;
@@ -37,7 +36,25 @@ if(!flock($fichier,1)) {
 	echo "erreur de verouillage mode 1";
 	return;
 }
-fread($fichier);
+?>
+
+
+<html>
+<body>
+<table border="1">
+<tr>
+	<th>Index</th>
+	<th>Heure de connexion</th>
+</tr>
+<?php
+$ligne = fgets($fichier);
+$cpt = 1;
+while($ligne != "") {
+	echo "<tr><td>".$cpt."</td><td>".$ligne."</td></tr>";	
+	$ligne = fgets($fichier);
+	$cpt = $cpt +1;
+}
+echo "</table>";
 if(!flock($fichier,3)) {
 	echo "erreur de deverouillage";
 	return;
@@ -47,9 +64,6 @@ if(!fclose($fichier)) {
 	return;
 }
 ?>
-
-<html>
-<body>
 
 </body>
 </html>
