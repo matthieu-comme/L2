@@ -7,17 +7,21 @@ public class CrowdGame {
 
 	CrowdFrame frame;
 	int w, h; // largeur et hauteur de la simulation
-	static Personne[] tabPersonnes;
+	static Displayable[] tabPersonne;
 
 	public CrowdGame(int w, int h, int nbOfMobiles) {
 		this.w = w;
-		this.h = h;
-		// ... A COMPLETER
+		this.h = h; 
 		this.frame = new CrowdFrame(w, h, this);
+		tabPersonne = new Displayable[nbOfMobiles];
+		for(int i = 0; i < nbOfMobiles; i = i+2) {
+			tabPersonne[i] = new Travailleur((int)(Math.random()*1000), (int)(Math.random()*800));
+			tabPersonne[i+1] = new Touriste((int)(Math.random()*1000), (int)(Math.random()*800), generateColor(nbOfMobiles,i));
+		}
 	}
 
-	Displayable[] getDisplayables() {
-		return tabPersonnes;// ... A COMPLETER
+	Displayable[] getDisplayables() {	
+		return tabPersonne;
 	}
 
 	// genere la ieme couleur parmi nb, de maniere a ce que les nb couleurs soient
@@ -37,15 +41,13 @@ public class CrowdGame {
 			} catch (InterruptedException e) {
 			}
 			// ... A COMPLETER
-
-			this.frame.repaint();
+			getDisplayables();
+			this.frame.repaint(); // repaint
 		}
 	}
 
 	public static void main(String[] toto) {
-		CrowdGame cg = new CrowdGame(1000, 800, 50);
-		tabPersonnes[0] = new Travailleur(200, 200, null);
-		tabPersonnes[1] = new Touriste(600, 600, Color.RED);
+		CrowdGame cg = new CrowdGame(1000, 800, 1000);		
 		cg.run();
 	}
 }

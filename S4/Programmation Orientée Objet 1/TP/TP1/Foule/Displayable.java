@@ -3,7 +3,7 @@ import java.awt.Color;
 
 class Displayable{
   int x,y,radius = 4; // (x,y):position, radius:pour l'affichage
-	Color c;
+  Color c;
   Displayable(int x, int y, Color c){
     this.x = x; this.y = y;
     this.c = c;
