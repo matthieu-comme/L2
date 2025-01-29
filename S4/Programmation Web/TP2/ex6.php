@@ -1,8 +1,10 @@
 <?php
 if (isset($_GET['phrase'])) {
 	$s = $_GET['phrase'];
-	$pattern = '/[Bb][Oo][Nn][Ss]?/';
+	$pattern = '/([Bb][Oo])([Nn])[Ss]?/';
 	preg_match_all($pattern,$s,$tab_match);
+	var_dump($tab_match); 
+	echo count($tab_match[0]);
 }
 ?>
 <html>
@@ -13,6 +15,7 @@ if (isset($_GET['phrase'])) {
 	<input type=text name="phrase">
 	<input type="submit" name="submit">
 </form>
-<p>Nombre d'occurrence de l'adjectif bon.s : <?php echo count($tab_match[0]);?> </p>
+<p>Nombre d'occurrence de l'adjectif bon.s : 
+<?php echo 1; ?> </p>
 </body>
 </html>
