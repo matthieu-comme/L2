@@ -4,13 +4,14 @@ import java.lang.Math;
 public class Touriste extends Personne {
     Touriste(int x, int y, Color c) {
         super(x, y, c);
-        v = 1;
-        dx = (int) (Math.random() % 1000);
-        dy = (int) (Math.random() % 800);
+        v = 3;
+        this.setRandomDirection();
     }
-
-    public void move() {
-        dx = (int) (Math.random() % 1000);
-        dy = (int) (Math.random() % 800);
+    
+    @Override
+     public void move(int t) { // t = temps de deplacement
+        if(Math.random() > 0.50) this.setRandomDirection();
+        x += (dx * v * t) / Math.sqrt(dx * dx + dy * dy);
+        y += (dy * v * t) / Math.sqrt(dx * dx + dy * dy);
     }
 }

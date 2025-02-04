@@ -19,7 +19,7 @@ public class CrowdFrame extends JFrame{
 
 	public void paint(Graphics gr){
 		gr.setColor(Color.WHITE);
-		gr.fillRect(0,0,this.getWidth(),this.getHeight());
+		//gr.fillRect(0,0,this.getWidth(),this.getHeight());
 		Displayable[] t = this.game.getDisplayables();
 		for(int i=0;i<t.length;i++) t[i].paint(gr);
 	}

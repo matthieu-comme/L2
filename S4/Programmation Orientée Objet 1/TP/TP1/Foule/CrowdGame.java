@@ -8,6 +8,7 @@ public class CrowdGame {
 	CrowdFrame frame;
 	int w, h; // largeur et hauteur de la simulation
 	static Displayable[] tabPersonne;
+	final static int nbPersonne = 50;
 
 	public CrowdGame(int w, int h, int nbOfMobiles) {
 		this.w = w;
@@ -37,17 +38,19 @@ public class CrowdGame {
 	public void run() {
 		while (true) {
 			try {
-				Thread.sleep(500);
+				Thread.sleep(1000/12);
 			} catch (InterruptedException e) {
 			}
-			// ... A COMPLETER
 			getDisplayables();
-			this.frame.repaint(); // repaint
+			this.frame.repaint();
+			for(int i = 0; i < tabPersonne.length; i++) {
+				((Personne)tabPersonne[i]).move(1);
+			}
 		}
 	}
 
 	public static void main(String[] toto) {
-		CrowdGame cg = new CrowdGame(1000, 800, 1000);		
+		CrowdGame cg = new CrowdGame(1000, 800, CrowdGame.nbPersonne);		
 		cg.run();
 	}
 }
