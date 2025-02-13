@@ -1,18 +1,22 @@
-<?php // CORRIGER !
-function isColorSet($s) { return (isset($_GET['R_'.$s]) && isset($_GET['V_'.$s]) && isset($_GET['B_'.$s])); }
-function colorToString($s) { return '#'.$_GET['R_'.$s].$_GET['V_'.$s].$_GET['B_'.$s]; }
+<?php
+function isColorSet($type) { return (isset($_GET['R_'.$type]) && isset($_GET['V_'.$type]) && isset($_GET['B_'.$type])); }
+function colorToString($type) { return '#'.$_GET['R_'.$type].$_GET['V_'.$type].$_GET['B_'.$type]; }
+function isColorValid($color) { 
+	$pattern = '^/#[[0-9a-fA-F]{6}]$/';
+	echo $color.'respecte le pattern '.$pattern;
+	return preg_match($pattern,$color); 
+}
 session_start();
-var_dump($_SESSION['style']);
-var_dump($_GET['submit']);
+
 if($_GET['submit'] == 'RESET') session_unset();
-if(!isset($_SESSION['style']) or $_SESSION['style']=='style="background-color:#ffffff;color:#000000"') {
+if(!isset($_SESSION['style']) || $_GET['submit'] == 'Envoyer') {//or $_SESSION['style']=='style="background-color:#ffffff;color:#000000"') {
 	$couleur_txt = (isColorSet('txt')) ? colorToString('txt') : '#000000';
 	$couleur_fond = (isColorSet('fond')) ? colorToString('fond') : 'ffffff';
 	$style = 'style="background-color:'.$couleur_fond.';color:'.$couleur_txt.'"';
 	$_SESSION['style'] = $style;
 }
 ?>
-<html><body <?php if (isset($_SESSION['style'])) echo $_SESSION['style'];?>>  
+<html><body <?php echo $_SESSION['style'];?>>  
 <h1>Choisis tes couleurs préférées <strong>(code hexa!)</strong></h1>
 <form method='get'>
 <fieldset style='display:inline_block'>
