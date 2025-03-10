@@ -27,12 +27,12 @@ INSERT INTO Station VALUES ('S032','Les Marronniers',654,'Pyrénées','R13',199)
 INSERT INTO Station VALUES ('S034','Carolina Park',3945,'Caroline','R23',5499);
 INSERT INTO Station VALUES ('S045','Sultan',350,'Turquie','R14',299);
 
-INSERT INTO Sejour VALUES ('202B','S012',TO_DATE('05/05/05','dd/mm/yyyy'), TO_DATE('18/05/05','dd/mm/yyyy'), 4);
-INSERT INTO Sejour VALUES ('289Z','S016',TO_DATE('01/01/07','dd/mm/yyyy'), TO_DATE('20/01/07','dd/mm/yyyy'), 2);
-INSERT INTO Sejour VALUES ('202B','S045',TO_DATE('19/05/05','dd/mm/yyyy'), TO_DATE('26/05/05','dd/mm/yyyy'), 4);
-INSERT INTO Sejour VALUES ('982M','S045',TO_DATE('19/05/05','dd/mm/yyyy'), TO_DATE('01/07/05','dd/mm/yyyy'), 4);
-INSERT INTO Sejour VALUES ('049Q','S034',TO_DATE('07/08/05','dd/mm/yyyy'), TO_DATE('31/08/05','dd/mm/yyyy'), 5);
-INSERT INTO Sejour VALUES ('202B','S034',TO_DATE('27/05/05','dd/mm/yyyy'), TO_DATE('15/06/05','dd/mm/yyyy'), 4);
+INSERT INTO Sejour VALUES ('202B','S012',TO_DATE('05/05/2005','dd/mm/yyyy'), TO_DATE('18/05/2005','dd/mm/yyyy'), 4);
+INSERT INTO Sejour VALUES ('289Z','S016',TO_DATE('01/01/2007','dd/mm/yyyy'), TO_DATE('20/01/2007','dd/mm/yyyy'), 2);
+INSERT INTO Sejour VALUES ('202B','S045',TO_DATE('19/05/2005','dd/mm/yyyy'), TO_DATE('26/05/2005','dd/mm/yyyy'), 4);
+INSERT INTO Sejour VALUES ('982M','S045',TO_DATE('19/05/2005','dd/mm/yyyy'), TO_DATE('01/07/2005','dd/mm/yyyy'), 4);
+INSERT INTO Sejour VALUES ('049Q','S034',TO_DATE('07/08/2005','dd/mm/yyyy'), TO_DATE('31/08/2005','dd/mm/yyyy'), 5);
+INSERT INTO Sejour VALUES ('202B','S034',TO_DATE('27/05/2005','dd/mm/yyyy'), TO_DATE('15/06/2005','dd/mm/yyyy'), 4);
 
 INSERT INTO Proposer VALUES ('S012','P0',29);
 INSERT INTO Proposer VALUES ('S012','P1',34);
