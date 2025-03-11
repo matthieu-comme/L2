@@ -40,6 +40,13 @@ INSERT INTO Proposer VALUES ('S012','P2',24);
 INSERT INTO Proposer VALUES ('S012','T',8.99);
 INSERT INTO Proposer VALUES ('S032','E',39);
 INSERT INTO Proposer VALUES ('S045','Th',3.49);
+-- bonus pour les divisions
+INSERT INTO Proposer VALUES ('S034','P2',34); 
+INSERT INTO Proposer VALUES ('S016','Th',4.49);
+INSERT INTO Proposer VALUES ('S016','P1',33);
+INSERT INTO Proposer VALUES ('S032','Th',5.49);
+INSERT INTO Proposer VALUES ('S034','Th',6.49);
+
 
 /*
 Verif de quelques contraintes :
