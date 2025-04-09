@@ -2,45 +2,19 @@ public class Tableau {
 	int[] tab;
 	Sequence sMax;
 
-	Tableau(int n) {
+	Tableau(int n, int a) { // tableau random de n entiers compris dans [-a;a]
 		this.sMax = new Sequence();
-		switch (n) {
-
-			case 1:
-				this.tab = new int[] { 20, -3, -16, -23, 18, 20, -7, 12, -5, -22, 15 }; // tableau de l'énoncé
-				break;
-			case 2:
-				this.tab = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 };
-				break;
-			case 3:
-				this.tab = new int[] { -2, 1, -3, 4, -1, 2, 1, -5, 4 };
-				break;
-			case 4:
-				this.tab = new int[] { 3, -1, -1, 4, 5, -2, 1 };
-				break;
-			case 5:
-				this.tab = new int[] { -5, -1, -3, -4 };
-				break;
-			case 6:
-				this.tab = new int[] { 1, 2, 3, 4, -11, 5, 6, 7 }; // S(5,7,18)
-				break;
-			case 7:
-				this.tab = new int[] { 8, -2, -3, 5, -1, 2, 6, -4, 3 };
-				break;
-
-			default:
-				this.tab = new int[] { 20, -3, -16, -23, 18, 20, -7, 12, -5, -22, 15 };
-				break;
-		}
+		this.tab = new int[n];
+		for (int i = 0; i < n; i++)
+			this.tab[i] = (int) (Math.random() * 2 * a) - a;
 	}
 
-	Tableau(boolean b) {
+	Tableau(boolean b) { // tableau précis
 		this.sMax = new Sequence();
 		if (b)
 			this.tab = new int[] { 20, -3, -16, -23, 18, 20, -7, 12, -5, -22, 15 }; // tableau de l'énoncé
 		else
-			this.tab = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 };
-
+			this.tab = new int[] { -5, -1, -3, -4 };
 	}
 
 	Tableau(Tableau t) {
@@ -54,6 +28,7 @@ public class Tableau {
 	public void methode1(int d, int f) {
 		sMax = new Sequence(d, d, tab[d]);
 		int somme;
+
 		for (int i = d; i <= f; i++) {
 			for (int j = i; j <= f; j++) {
 				somme = sommeTab(i, j);
@@ -66,6 +41,7 @@ public class Tableau {
 	public void methode2(int d, int f) {
 		sMax = new Sequence(d, d, tab[d]);
 		int somme;
+
 		for (int i = d; i <= f; i++) {
 			somme = 0;
 			for (int j = i; j <= f; j++) {
@@ -101,8 +77,7 @@ public class Tableau {
 		int sommeGauche = Integer.MIN_VALUE;
 		int dMax = m;
 
-		// du milieu vers la gauche
-		for (int i = m; i >= d; i--) {
+		for (int i = m; i >= d; i--) { // du milieu vers la gauche
 			somme += tab[i];
 			if (somme > sommeGauche) {
 				sommeGauche = somme;
@@ -114,8 +89,7 @@ public class Tableau {
 		int sommeDroite = Integer.MIN_VALUE;
 		int fMax = m + 1;
 
-		// du milieu vers la droite
-		for (int i = m + 1; i <= f; i++) {
+		for (int i = m + 1; i <= f; i++) { // du milieu vers la droite
 			somme += tab[i];
 			if (somme > sommeDroite) {
 				sommeDroite = somme;
@@ -123,6 +97,26 @@ public class Tableau {
 			}
 		}
 		return new Sequence(dMax, fMax, sommeGauche + sommeDroite);
+	}
+
+	public void kadane() {
+		int n = this.getN();
+		int somme = this.tab[0];
+		int d_temp = 0;
+
+		this.sMax = new Sequence(0, 0, somme);
+
+		for (int i = 1; i < n; i++) {
+			if (somme < 0) { // on quitte la séquence actuelle et commence une nouvelle
+				somme = this.tab[i];
+				d_temp = i;
+			} else
+				somme += this.tab[i];
+
+			if (somme > sMax.somme) {
+				this.sMax = new Sequence(d_temp, i, somme);
+			}
+		}
 	}
 
 	public int sommeTab(int d, int f) { // O(f-d+1) = O(n) pour f-d maximal
@@ -158,4 +152,23 @@ public class Tableau {
 		System.out.println("SMax : " + sMax);
 	}
 
+	// essayer un tableau précis,sinon il y a la classe Random
+	public static void main(String[] args) {
+		Tableau t1 = new Tableau(true);
+		Tableau t2 = new Tableau(t1);
+		Tableau t3 = new Tableau(t1);
+		Tableau t4 = new Tableau(t1);
+
+		t1.affiche();
+
+		t1.methode1(0, t1.getN() - 1);
+		t2.methode2(0, t2.getN() - 1);
+		t3.sMax = t3.methode3(0, t3.getN() - 1);
+		t4.kadane();
+
+		System.out.println("Methode 1 : " + t1.sMax);
+		System.out.println("Methode 2 : " + t2.sMax);
+		System.out.println("Methode 3 : " + t3.sMax);
+		System.out.println("Kadane : " + t4.sMax);
+	}
 }
